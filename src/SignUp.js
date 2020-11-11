@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
+import request from 'superagent';
 
 export default class Auth extends Component {
     
     state = {
         email: '',
-        password: ''
+        password: '',
+        loading: false,
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         console.log(this.state);
+
+        this.setState({ loading: true })
+        const user = await request
+            .post('https://mysterious-hamlet-17978.herokuapp.com/auth/signup')
+            .send(this.state);
+        
+        this.setState({ loading: false })
+        this.props.changeTokenAndUserName(user.body.email)
     }
     
     render() {
@@ -30,7 +40,10 @@ export default class Auth extends Component {
                         value={this.state.password}
                         type="password" />
                     </label>
-                    <button>Sign Up!</button>
+                    {
+                        this.state.loading? 'loading'
+                        : <button>Sign Up!</button>
+                    }
                 </form>
             </div>
         )

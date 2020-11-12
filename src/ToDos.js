@@ -53,12 +53,12 @@ export default class ToDos extends Component {
     const { todoTask, loading, todos } = this.state;
 
         return (
-            <div>
+            <div id='main'>
                 The To Dos:
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Add a to do:
                         <input 
+                            placeholder='Add new to do'
                             value={todoTask}
                             onChange={(e) => this.setState({ todoTask: e.target.value })}
                         />
@@ -74,7 +74,7 @@ export default class ToDos extends Component {
                         key={`${todo.todo}${todo.id}${Math.random()}`} 
                         style={{textDecoration: todo.completed ? 'line-through' : 'none'}
                         }>
-                    todo: {todo.todo}
+                    {todo.todo}
                     {
                         todo.completed ? '' : <button onClick={() => this.handleCompletedClick(todo.id)}>
                             Complete To Do

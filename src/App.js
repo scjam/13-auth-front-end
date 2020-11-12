@@ -48,6 +48,7 @@ export default class App extends Component {
               <button onClick={this.logOut}>Log Out</button>
             </div>
             : <> 
+              <Link to="/todos"><div>List of To Dos</div></Link>
               <Link to="/login"><div>Log In Here</div></Link>
               <Link to="/signup"><div>Sign Up Here</div></Link>
             </>}

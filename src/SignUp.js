@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import request from 'superagent';
 
-export default class Auth extends Component {
+export default class SignUp extends Component {
     
     state = {
         email: '',
@@ -26,7 +26,7 @@ export default class Auth extends Component {
     render() {
         return (
             <div>
-                <h1>Sign Up/Log In Here</h1>
+                <h1>Sign Up Here</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Email:
@@ -42,7 +42,8 @@ export default class Auth extends Component {
                         type="password" />
                     </label>
                     {
-                        this.state.loading? 'loading'
+                        this.state.loading
+                        ? 'loading'
                         : <button>Sign Up!</button>
                     }
                 </form>

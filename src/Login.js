@@ -7,20 +7,25 @@ export default class Login extends Component {
         email: '',
         password: '',
         loading: false,
+        err: null,
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state);
-
         this.setState({ loading: true })
-        const user = await request
+
+        try{
+            const user = await request
             .post('https://mysterious-hamlet-17978.herokuapp.com/auth/login')
             .send(this.state);
         
-        this.setState({ loading: false })
-        this.props.changeEmailToken(user.body.email, user.body.token);
-        this.props.history.push('/todos');
+            this.setState({ loading: false })
+            this.props.changeEmailToken(user.body.email, user.body.token);
+            this.props.history.push('/todos');
+        }
+        catch(err) {
+            this.setState({ err: 'invalid entry' })
+        }
     }
     
     render() {
@@ -30,6 +35,7 @@ export default class Login extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Email:
+                        {this.state.err && <div>{this.state.err}</div>}
                         <input 
                         onChange={(e) => this.setState({ email: e.target.value })}
                         value={this.state.email} />

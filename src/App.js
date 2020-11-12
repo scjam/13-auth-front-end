@@ -10,6 +10,7 @@ import Login from './Login.js';
 import SignUp from './SignUp.js';
 import Home from './Home.js';
 import ToDos from './ToDos';
+import Privacy from './Privacy';
 
 export default class App extends Component {
   
@@ -28,18 +29,37 @@ export default class App extends Component {
     })
   }
 
+  logOut = () => {
+    localStorage.setItem('TOKEN', '');
+    localStorage.setItem('USERNAME', '');
+
+    this.setState({ username: '', token: '' })
+  }
+
   render() {
     return (
       <div>
         <Router>
           <ul>
-            { this.state.username }
-            <Link to="/login">Log In</Link>
-            <Link to="/signup">Sign Up</Link>
+            { 
+            this.state.token
+            ? <div>
+              {this.state.username}
+              <button onClick={this.logOut}>Log Out</button>
+            </div>
+            : <> 
+              <Link to="/login"><div>Log In Here</div></Link>
+              <Link to="/signup"><div>Sign Up Here</div></Link>
+            </>}
           </ul>
           <Switch>
             <Route exact path='/' render={(routerProps) => <Home {...routerProps} />} />
-            <Route exact path='/login' render={(routerProps) => <Login {...routerProps} />} />
+            <Route exact path='/login' render={(routerProps) => 
+              <Login 
+                {...routerProps}
+                changeEmailToken={this.changeEmailToken}
+              />
+            } />
             <Route 
               exact 
               path='/signup' 
@@ -50,7 +70,8 @@ export default class App extends Component {
                 />
               } 
             />
-            <Route 
+            <Privacy 
+              token={this.state.token}
               exact 
               path='/todos' 
               render={(routerProps) => 

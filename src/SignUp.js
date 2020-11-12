@@ -19,7 +19,8 @@ export default class Auth extends Component {
             .send(this.state);
         
         this.setState({ loading: false })
-        this.props.changeTokenAndUserName(user.body.email)
+        this.props.changeEmailToken(user.body.email, user.body.token);
+        this.props.history.push('/todos');
     }
     
     render() {

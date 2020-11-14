@@ -1,5 +1,6 @@
-.App {
-  text-align: center;
+body {
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #main {
@@ -15,4 +16,9 @@ label {
 
 button {
   display: block;
+}
+img {
+  float: right;
+  height: 340px;
+  width: auto;
 }

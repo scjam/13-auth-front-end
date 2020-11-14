@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import guy from './cereal_guy.jpg'
 
 export default class ToDos extends Component {
     state = {
@@ -55,6 +56,7 @@ export default class ToDos extends Component {
         return (
             <div id='main'>
                 The To Dos:
+                <img src={guy} alt='cereal guy'/>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <input 
